@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import UserGist from "../../components/UserGist/UserGist";
-import { Typography, Avatar, Button, CircularProgress } from "@mui/material";
+import { Typography, Avatar, Button } from "@mui/material";
 import { UserContext } from "../../contexts/UserContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getUserGists, getAuthUserGists } from "../../api/api";
@@ -11,6 +11,7 @@ import {
   CenterDiv,
   StyledLink,
 } from "./UserView.styles";
+import Loader from "../../components/Loader/Loader";
 
 export default function UserView({ username }) {
   const [gists, setGists] = useState<any[]>([]);
@@ -81,15 +82,7 @@ export default function UserView({ username }) {
             </Button>
           </CenterDiv>
         </LeftDiv>
-        <RightDiv>
-          {loading ? (
-            <CenterDiv>
-              <CircularProgress />{" "}
-            </CenterDiv>
-          ) : (
-            listGists()
-          )}
-        </RightDiv>
+        <RightDiv>{loading ? <Loader /> : listGists()}</RightDiv>
       </GridContainer>
     </div>
   );

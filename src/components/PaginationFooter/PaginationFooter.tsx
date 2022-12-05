@@ -20,7 +20,7 @@ export default function PaginationFooter({
         <Button
           customstyle="dark"
           onClick={handleNextPage}
-          text={"Next Button"}
+          text={"Next Page"}
           type="button"
         >
           <ArrowForwardIcon sx={{ marginLeft: ".2em" }} />

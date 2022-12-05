@@ -1,10 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import {
-  HeaderRightDiv,
   StyledHeaderDiv,
   GistScreenContainer,
-  EachDiv,
-  BorderedDiv,
   StyledGistCard,
   CardHeader,
   CardContent,
@@ -13,12 +10,9 @@ import {
   FlexDiv,
   CenterDiv,
 } from "./GistDetails.styles";
-import { Typography, CircularProgress } from "@mui/material";
+import { Typography } from "@mui/material";
 import UserInfo from "../../components/UserInfo/UserInfo";
-import DeleteIcon from "@mui/icons-material/Delete";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
-import StarIcon from "@mui/icons-material/Star";
-import EditIcon from "@mui/icons-material/Edit";
+import GistActions from "../../components/GistActions/GistActions";
 import ArrowsBox from "../../components/ArrowBox/ArrowBox";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
@@ -31,6 +25,7 @@ import {
   deleteGist,
   forkGist,
 } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
 
 export default function GistDetails() {
   const [filecontent, setFileContent] = useState<string[]>([]);
@@ -123,71 +118,23 @@ export default function GistDetails() {
     }
   };
 
-  const showGistActions = () => {
-    return user ? (
-      <HeaderRightDiv>
-        {user.username === owner.login && (
-          <>
-            {" "}
-            <EachDiv onClick={editGist}>
-              <EditIcon sx={{ color: "#0C76FF" }} />
-              <Typography color={"#0C76FF"}>Edit</Typography>
-            </EachDiv>
-            <EachDiv onClick={() => deleteMyGist(id)}>
-              <DeleteIcon sx={{ color: "#0C76FF" }} />
-              <Typography color={"#0C76FF"}>Delete</Typography>
-            </EachDiv>
-          </>
-        )}
-        <EachDiv onClick={() => toggleStar(id)}>
-          {starred ? (
-            <StarIcon sx={{ color: "#0C76FF" }} />
-          ) : (
-            <StarBorderIcon sx={{ color: "#0C76FF" }} />
-          )}
-          <Typography color={"#0C76FF"}>Star</Typography>
-          <BorderedDiv>
-            <Typography
-              sx={{
-                fontSize: ".9em",
-                margin: "0.2em 0 0 0",
-                padding: 0,
-                color: "#787a79",
-              }}
-            >
-              {starred ? 1 : 0}
-            </Typography>
-          </BorderedDiv>
-        </EachDiv>
-        <EachDiv onClick={() => fork(id)}>
-          <StarBorderIcon sx={{ color: "#0C76FF" }} />
-          <Typography color={"#0C76FF"}>Fork</Typography>
-          <BorderedDiv>
-            <Typography
-              sx={{
-                fontSize: ".9em",
-                margin: "0.2em 0 0 0",
-                padding: 0,
-                color: "#787a79",
-              }}
-            >
-              0
-            </Typography>
-          </BorderedDiv>
-        </EachDiv>
-      </HeaderRightDiv>
-    ) : null;
-  };
-
   return loading ? (
-    <CenterDiv>
-      <CircularProgress />
-    </CenterDiv>
+    <Loader />
   ) : (
     <GistScreenContainer>
       <StyledHeaderDiv>
         <UserInfo item={state} />
-        {showGistActions()}
+        <GistActions
+          toggleStar={toggleStar}
+          starred={starred}
+          user={user}
+          owner={owner}
+          id={id}
+          fork={fork}
+          editGist={editGist}
+          deleteMyGist={deleteMyGist}
+          showEditDelete={true}
+        />
       </StyledHeaderDiv>
       <StyledGistCard elevation={5}>
         <CardHeader>

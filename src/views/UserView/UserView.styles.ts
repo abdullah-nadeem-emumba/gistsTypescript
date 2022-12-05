@@ -32,8 +32,10 @@ export const RightDiv = styled.div`
 
 export const CenterDiv = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  width: inherit;
+  height: inherit;
 `;
 
 export const GithubLinkDiv = styled.div`

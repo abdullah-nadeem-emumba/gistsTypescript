@@ -3,8 +3,8 @@ import { LIST, CARD } from "../../constants/constants";
 import TableView from "../TableView/TableView";
 import ToggleView from "../../components/ToggleView/ToggleView";
 import CardView from "../CardView";
-import CircularProgress from "@mui/material/CircularProgress";
 import PaginationFooter from "../../components/PaginationFooter/PaginationFooter";
+import Loader from "../../components/Loader/Loader";
 
 export default function StarredGists({
   loading,
@@ -41,5 +41,5 @@ export default function StarredGists({
       />
     </div>
   );
-  return loading ? <CircularProgress /> : <>{displayScreen()}</>;
+  return loading ? <Loader /> : <>{displayScreen()}</>;
 }

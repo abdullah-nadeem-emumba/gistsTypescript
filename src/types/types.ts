@@ -29,6 +29,24 @@ export type HeaderProps = {
   handleSearch?: () => any;
 };
 
+export type GistActionsProps = {
+  starred: Boolean | undefined;
+  toggleStar: (id: string) => any;
+  fork: (id: string) => any;
+  deleteMyGist?: (id: string) => void;
+  editGist?: () => any;
+  user: any;
+  owner: any;
+  id: string;
+  showEditDelete?: Boolean;
+};
+
+export type UserType = {
+  token: string;
+  username: string;
+  url: string;
+};
+
 export type LandingScreenProps = {
   emptyScreen?: Boolean;
   gists: any[];

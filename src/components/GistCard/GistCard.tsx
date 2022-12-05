@@ -9,10 +9,11 @@ import {
   CenterDiv,
 } from "./GistCard.styles";
 import UserInfo from "../UserInfo/UserInfo";
-import { CircularProgress, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { GistCardProps } from "../../types/types";
 import { getGistContent } from "../../api/api";
 import { formatFileContent } from "../../utils/utils";
+import Loader from "../Loader/Loader";
 
 export default function GistCard(props: GistCardProps) {
   const { onCardClick, item } = props;
@@ -66,15 +67,7 @@ export default function GistCard(props: GistCardProps) {
 
   return (
     <StyledCard onClick={() => onCardClick(item)}>
-      <GistDiv>
-        {loading ? (
-          <CenterDiv>
-            <CircularProgress />
-          </CenterDiv>
-        ) : (
-          displayFileContent()
-        )}
-      </GistDiv>
+      <GistDiv>{loading ? <Loader /> : displayFileContent()}</GistDiv>
       <TopBorderDiv>
         <UserInfo item={item} />
       </TopBorderDiv>

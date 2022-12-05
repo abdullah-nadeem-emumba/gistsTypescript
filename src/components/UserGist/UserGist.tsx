@@ -1,15 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import UserInfo from "../UserInfo/UserInfo";
 import { Typography } from "@mui/material";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
-import StarIcon from "@mui/icons-material/Star";
 import { UserContext } from "../../contexts/UserContext";
 import {
-  EachDiv,
   LineNumberText,
   UpperDiv,
-  BorderedDiv,
-  StyledDiv,
   StyledCard,
   CenterDiv,
   FlexDiv,
@@ -23,6 +18,7 @@ import {
   forkGist,
 } from "../../api/api";
 import { formatFileContent } from "../../utils/utils";
+import GistActions from "../GistActions/GistActions";
 
 export default function UserGist({ item, onGistClick }) {
   const [filecontent, setFileContent] = useState<string[]>([]);
@@ -95,46 +91,15 @@ export default function UserGist({ item, onGistClick }) {
     <>
       <UpperDiv>
         <UserInfo item={item} />
-        {user && (
-          <StyledDiv>
-            <EachDiv onClick={() => toggleStar(item.id)}>
-              {starred ? (
-                <StarIcon sx={{ color: "#0C76FF" }} />
-              ) : (
-                <StarBorderIcon sx={{ color: "#0C76FF" }} />
-              )}
-              <Typography color={"#0C76FF"}>Star</Typography>
-              <BorderedDiv>
-                <Typography
-                  sx={{
-                    fontSize: ".9em",
-                    margin: "0.2em 0 0 0",
-                    padding: 0,
-                    color: "#787a79",
-                  }}
-                >
-                  {starred ? 1 : 0}
-                </Typography>
-              </BorderedDiv>
-            </EachDiv>
-            <EachDiv onClick={() => fork(item.id)}>
-              <StarBorderIcon sx={{ color: "#0C76FF" }} />
-              <Typography color={"#0C76FF"}>Fork</Typography>
-              <BorderedDiv>
-                <Typography
-                  sx={{
-                    fontSize: ".9em",
-                    margin: "0.2em 0 0 0",
-                    padding: 0,
-                    color: "#787a79",
-                  }}
-                >
-                  0
-                </Typography>
-              </BorderedDiv>
-            </EachDiv>
-          </StyledDiv>
-        )}
+        <GistActions
+          toggleStar={toggleStar}
+          starred={starred}
+          user={user}
+          owner={item.owner}
+          id={item.id}
+          fork={fork}
+          showEditDelete={false}
+        />
       </UpperDiv>
       <StyledCard onClick={() => onGistClick(item)} elevation={3}>
         {displayFileContent()}

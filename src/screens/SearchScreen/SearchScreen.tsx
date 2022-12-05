@@ -16,13 +16,14 @@ export default function SearchScreen() {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const searchGists = async (searchValue: string) => {
+  const searchGists = async (searchValue: string, update?: Boolean) => {
     setLoading(true);
     const data = await getSearchedGists(searchValue, 9, page);
     console.log(data);
     if (data.length > 0) {
       setGists(data);
-      setPage(1);
+      setEmptyScreen(false);
+      if (update) setPage(1);
     } else {
       setEmptyScreen(true);
     }
@@ -34,6 +35,16 @@ export default function SearchScreen() {
       searchGists(state?.searchUserName);
     }
   }, []);
+
+  console.log(page);
+
+  useEffect(() => {
+    if (searchVal) {
+      searchGists(searchVal, true);
+    } else {
+      searchGists(state?.searchUserName);
+    }
+  }, [page]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchVal(e.target.value);

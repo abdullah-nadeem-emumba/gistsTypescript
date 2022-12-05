@@ -55,16 +55,20 @@ export default function StarredGistsScreen() {
     listStarredGists();
   }, [page]);
 
-  const searchGists = async () => {
-    const data = await getSearchedGists(searchVal, 9, page);
-    setGists(data);
-    setPage(1);
+  const handleSearch = () => {
+    navigate("/search", {
+      state: {
+        searchUserName: searchVal,
+      },
+    });
   };
 
   const listStarredGists = async () => {
+    setLoading(true);
     const data = await getStarredGists(9, page);
     setGists(data);
-    setPage(1);
+    setLoading(false);
+    // setPage(1);
   };
 
   const star = async (
@@ -89,18 +93,18 @@ export default function StarredGistsScreen() {
     }
   };
 
-  const handleKeypress = async (e: KeyboardEvent) => {
-    if (e.key === "Enter") {
-      await searchGists();
-    }
-  };
+  // const handleKeypress = async (e: KeyboardEvent) => {
+  //   if (e.key === "Enter") {
+  //     await handleSearch();
+  //   }
+  // };
   return (
     <Root
       header={
         <Header
           searchVal={searchVal}
           handleSearchChange={handleSearchChange}
-          handleSearch={searchGists}
+          handleSearch={handleSearch}
         />
       }
       main={
