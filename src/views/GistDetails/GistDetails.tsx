@@ -1,4 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 import {
   StyledHeaderDiv,
   GistScreenContainer,
@@ -37,7 +39,8 @@ export default function GistDetails() {
   const navigate = useNavigate();
   const { files, owner, id, description } = state;
   const filename = Object.keys(files)[0];
-  const { user } = useContext(UserContext);
+  //const { user } = useContext(UserContext);
+  const user = useSelector((state: RootState) => state.user);
 
   const checkGistStar = async (gistID: string) => {
     const res = await isGistStarred(gistID);

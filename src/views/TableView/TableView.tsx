@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 import {
   Table,
   TableBody,
@@ -11,7 +13,6 @@ import {
 } from "@mui/material";
 import TableStar from "../../components/TableStar/TableStar";
 import Checkbox from "../../components/Checkbox/Checkbox";
-import moment from "moment";
 import { TableViewProps } from "../../types/types";
 import {
   FlexDiv,
@@ -20,9 +21,11 @@ import {
   StyledTableCell,
 } from "./TableView.styles";
 import { UserContext } from "../../contexts/UserContext";
+import { formattedDate, formattedTime } from "../../utils/utils";
 
 export default function TableView(props: TableViewProps) {
-  const { user } = useContext(UserContext);
+  //const { user } = useContext(UserContext);
+  const user = useSelector((state: RootState) => state.user);
   const { gists, onRowClick } = props;
   const displayFileNames = (filesArr: string[]) => {
     return React.Children.toArray(
@@ -59,9 +62,6 @@ export default function TableView(props: TableViewProps) {
                 gists.length > 0 &&
                 gists.map((row: any) => {
                   const filenames = Object.keys(row.files);
-                  const date = moment(row.created_at).format("D MMM YYYY");
-                  const time = moment(row.created_at).format("h:mm A");
-
                   return (
                     <TableRow
                       key={row.id}
@@ -86,14 +86,18 @@ export default function TableView(props: TableViewProps) {
                       >
                         <FlexDiv>{row.owner.login}</FlexDiv>
                       </StyledTableCell>
-                      <StyledTableCell>{date}</StyledTableCell>
-                      <StyledTableCell>{time}</StyledTableCell>
+                      <StyledTableCell>
+                        {formattedDate(row.created_at)}
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        {formattedTime(row.created_at)}
+                      </StyledTableCell>
                       <StyledTableCell>{"WebServer"}</StyledTableCell>
                       <StyledTableCell className="notebook-name">
                         {displayFileNames(filenames)}
                       </StyledTableCell>
                       <StyledTableCell>
-                        {user && (
+                        {user?.username && (
                           <TableStar
                             id={row.id}
                             handleStar={props.handleStar}

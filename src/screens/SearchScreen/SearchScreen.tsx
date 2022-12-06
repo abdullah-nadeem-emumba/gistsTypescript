@@ -12,18 +12,16 @@ export default function SearchScreen() {
   const [page, setPage] = useState(1);
   const [searchVal, setSearchVal] = useState("");
   const [emptyScreen, setEmptyScreen] = useState(false);
-  //   const [searchResult, setSearchResult] = useState([]);
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const searchGists = async (searchValue: string, update?: Boolean) => {
+  const searchGists = async (searchValue: string) => {
     setLoading(true);
     const data = await getSearchedGists(searchValue, 9, page);
     console.log(data);
     if (data.length > 0) {
       setGists(data);
       setEmptyScreen(false);
-      if (update) setPage(1);
     } else {
       setEmptyScreen(true);
     }
@@ -36,11 +34,9 @@ export default function SearchScreen() {
     }
   }, []);
 
-  console.log(page);
-
   useEffect(() => {
     if (searchVal) {
-      searchGists(searchVal, true);
+      searchGists(searchVal);
     } else {
       searchGists(state?.searchUserName);
     }

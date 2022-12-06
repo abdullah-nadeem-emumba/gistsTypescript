@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const formatFileContent = (content: string | JSON) => {
   if (typeof content === "string") return content.split(/\r?\n/);
   return JSON.stringify(content, null, 2).split(/\r?\n/);
@@ -16,4 +18,18 @@ export const returnFiles = (filesArr: any) => {
     };
   });
   return files;
+};
+
+// export const formattedTime = (time: string) => {
+//   const date = moment(time).format("D MMM YYYY");
+//   const hours = moment(time).format("h:mm A");
+//   return `${date} ${hours}`;
+// };
+
+export const formattedTime = (time: string) => {
+  return moment(time).format("D MMM YYYY");
+};
+
+export const formattedDate = (time: string) => {
+  return moment(time).format("h:mm A");
 };

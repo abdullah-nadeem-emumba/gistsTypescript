@@ -10,12 +10,17 @@ import { UserContext } from "../../contexts/UserContext";
 import { HeaderProps } from "../../types/types";
 import { RightDiv, LeftDiv, StyledLink } from "./Header.styles";
 import logo from "../../assets/emumba-logo.png";
+import { login, logout } from "../../store/userSlice";
+import { RootState } from "../../store/store";
 
 export default function Header(props: HeaderProps) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const { user, setUser } = useContext(UserContext);
+  //const { user, setUser } = useContext(UserContext);
+  const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
+
+  console.log("REDUX STATE", user);
 
   const handleOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -25,15 +30,17 @@ export default function Header(props: HeaderProps) {
     setAnchorEl(null);
   };
 
-  const login = () => {
-    setUser(USER);
+  const userLogin = () => {
+    //setUser(USER);
+    dispatch(login());
     localStorage.setItem("user", JSON.stringify(USER));
     console.log(localStorage.getItem("user"));
   };
 
   const signout = () => {
     localStorage.removeItem("user");
-    setUser(null);
+    dispatch(logout());
+    //setUser(null);
     setAnchorEl(null);
   };
 
@@ -55,10 +62,10 @@ export default function Header(props: HeaderProps) {
           label="Search Notes..."
           placeholder="Search Notes..."
         />
-        {!user ? (
+        {!user?.username ? (
           <Button
             customstyle="light"
-            onClick={login}
+            onClick={userLogin}
             text="Login"
             type="button"
           ></Button>

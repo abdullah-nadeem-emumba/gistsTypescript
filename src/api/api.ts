@@ -8,10 +8,13 @@ const api = axios.create({
   },
 });
 
-const user = getUserFromStorage();
+const getConfig = () => {
+  const user = getUserFromStorage();
+  const config = {
+    headers: { authorization: `token ${user?.token}` },
+  };
 
-const config = {
-  headers: { authorization: `token ${user.token}` },
+  return config;
 };
 
 export const getPublicGists = async (per_page: number, page: number) => {
@@ -33,7 +36,7 @@ export const getGistContent = async (url: string) => {
 
 export const isGistStarred = async (gistID: string) => {
   try {
-    const response = await api.get(`/gists/${gistID}/star`, config);
+    const response = await api.get(`/gists/${gistID}/star`, getConfig());
     if (response.status === 204) {
       return true;
     }
@@ -43,7 +46,7 @@ export const isGistStarred = async (gistID: string) => {
 };
 
 export const deleteGist = async (gistID: string) => {
-  const response = await api.delete(`/gists/${gistID}`, config);
+  const response = await api.delete(`/gists/${gistID}`, getConfig());
   if (response.status === 204) return true;
   return false;
 };
@@ -54,18 +57,18 @@ export const starGist = async (gistID: string) => {
     {
       gist_id: gistID,
     },
-    config
+    getConfig()
   );
   return response.status === 204 ? true : false;
 };
 
 export const unStarGist = async (gistID: string) => {
-  const response = await api.delete(`/gists/${gistID}/star`, config);
+  const response = await api.delete(`/gists/${gistID}/star`, getConfig());
   return response.status === 204 ? true : false;
 };
 
 export const forkGist = async (gistID: string) => {
-  const response = await api.post(`/gists/${gistID}/forks`, config);
+  const response = await api.post(`/gists/${gistID}/forks`, getConfig());
   console.log(response);
   return response;
 };
@@ -103,7 +106,7 @@ export const createNewGist = async (description: string, files: any) => {
     public: true,
     files: returnFiles(files),
   };
-  const response = await api.post("/gists", data, config);
+  const response = await api.post("/gists", data, getConfig());
   console.log(response);
   return response;
 };
@@ -114,7 +117,7 @@ export const editGist = async (id: string, description: string, files: any) => {
     description,
     files: returnFiles(files),
   };
-  const response = await api.patch(`/gists/${id}`, data, config);
+  const response = await api.patch(`/gists/${id}`, data, getConfig());
   console.log(response);
   return response;
 };
@@ -122,13 +125,13 @@ export const editGist = async (id: string, description: string, files: any) => {
 export const getStarredGists = async (per_page: number, page: number) => {
   const response = await api.get(
     `/gists/starred?paer_page=${per_page}&page=${page}`,
-    config
+    getConfig()
   );
   console.log(response);
   return response.data;
 };
 
 export const getAuthUserGists = async () => {
-  const response = await api.get("/gists", config);
+  const response = await api.get("/gists", getConfig());
   return response.data;
 };

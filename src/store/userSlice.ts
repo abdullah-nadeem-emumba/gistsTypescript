@@ -1,35 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { UserType } from "../types/types";
 import { USER } from "../constants/constants";
+import { getUserFromStorage } from "../utils/utils";
 
-const initialState: UserType = {
+const initialState: UserType = getUserFromStorage() || {
   username: "",
   token: "",
   url: "",
 };
 
-export const counterSlice = createSlice({
-  name: "counter",
+export const userSlice = createSlice({
+  name: "user",
   initialState,
   reducers: {
     login: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state = { ...USER };
+      state.username = USER.username;
+      state.token = USER.token;
+      state.url = USER.url;
     },
     logout: (state) => {
-      state = {
-        username: "",
-        token: "",
-        url: "",
-      };
+      state.username = "";
+      state.token = "";
+      state.url = "";
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { login, logout } = counterSlice.actions;
+export const { login, logout } = userSlice.actions;
 
-export default counterSlice.reducer;
+export default userSlice.reducer;

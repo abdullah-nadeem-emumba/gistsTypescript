@@ -2,13 +2,7 @@ import React, { useState, useEffect } from "react";
 import Root from "../../layout/Root/Root";
 import LandingScreen from "../../views/LandingScreen/LandingScreen";
 import Header from "../../layout/Header/Header";
-import {
-  getPublicGists,
-  getSearchedGists,
-  getStarredGists,
-  starGist,
-  unStarGist,
-} from "../../api/api";
+import { getPublicGists, starGist, unStarGist } from "../../api/api";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Home() {
@@ -17,7 +11,6 @@ export default function Home() {
   const [gists, setGists] = useState([]);
   const [page, setPage] = useState(1);
   const [searchVal, setSearchVal] = useState("");
-  //   const [searchResult, setSearchResult] = useState([]);
   const navigate = useNavigate();
   const { state } = useLocation();
   //   const { user } = useContext(UserContext);
@@ -41,36 +34,14 @@ export default function Home() {
     navigate("/gistdetails", { state: { ...gist } });
   };
 
-  //   useEffect(() => {
-  //     if (searchVal) {
-  //       getUserGists();
-  //     } else {
-  //       getGists();
-  //     }
-  //   }, [page, viewType]);
-
   useEffect(() => {
     console.log(state);
-
-    // if (state && state.hasOwnProperty("searchUserName")) {
-    //   searchGists(state.searchUserName);
-    // } else {
-    //   getData();
-    // }
     getData();
   }, []);
 
   useEffect(() => {
-    // if (searchVal) {
-    //   searchGists(searchVal);
-    // } else if (state && state.hasOwnProperty("searchUserName")) {
-    //   searchGists(state.searchUserName);
-    // } else {
     getData();
-    //}
   }, [page]);
-
-  console.log("GISTS", gists);
 
   const getData = async () => {
     setLoading(true);
@@ -80,15 +51,6 @@ export default function Home() {
     }
     setLoading(false);
   };
-
-  // const searchGists = async (searchValue: string) => {
-  //   setLoading(true);
-  //   const data = await getSearchedGists(searchValue, 9, page);
-  //   console.log(data);
-  //   setGists(data);
-  //   setPage(1);
-  //   setLoading(false);
-  // };
 
   const handleSearch = () => {
     navigate("/search", {

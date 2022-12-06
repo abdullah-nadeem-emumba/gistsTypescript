@@ -23,7 +23,7 @@ export default function GistActions(props: GistActionsProps) {
     showEditDelete,
   } = props;
   const showGistActions = () => {
-    return user ? (
+    return user.username ? (
       <>
         {user.username === owner.login && showEditDelete && (
           <>

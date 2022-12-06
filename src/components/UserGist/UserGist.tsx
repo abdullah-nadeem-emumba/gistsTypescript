@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 import UserInfo from "../UserInfo/UserInfo";
 import { Typography } from "@mui/material";
 import { UserContext } from "../../contexts/UserContext";
@@ -25,7 +27,8 @@ export default function UserGist({ item, onGistClick }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [starred, setStarred] = useState<Boolean | undefined>(false);
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
+  const user = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     getFileContent();

@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import { isGistStarred, starGist, unStarGist } from "../../api/api";
-import { useNavigate } from "react-router-dom";
 
 export default function Star({ id, handleStar, handleUnstar }) {
-  const navigate = useNavigate();
   const [starred, setStarred] = useState<Boolean | undefined>(false);
 
   useEffect(() => {
@@ -17,17 +15,17 @@ export default function Star({ id, handleStar, handleUnstar }) {
     setStarred(res);
   };
 
-  const star = async (gistID: string) => {
-    const res = await starGist(gistID);
-    if (res) setStarred(true);
-  };
+  // const star = async (gistID: string) => {
+  //   const res = await starGist(gistID);
+  //   if (res) setStarred(true);
+  // };
 
-  const unStar = async (gistID: string) => {
-    const res = await unStarGist(gistID);
-    if (res) {
-      setStarred(false);
-    }
-  };
+  // const unStar = async (gistID: string) => {
+  //   const res = await unStarGist(gistID);
+  //   if (res) {
+  //     setStarred(false);
+  //   }
+  // };
 
   return starred ? (
     <StarIcon
