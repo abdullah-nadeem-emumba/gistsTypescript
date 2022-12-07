@@ -3,6 +3,7 @@ import Root from "../../layout/Root/Root";
 import Header from "../../layout/Header/Header";
 import GistForm from "../../views/GistForm/GistForm";
 import { useNavigate } from "react-router-dom";
+import GistHookForm from "../../views/GistHookForm/GistHookForm";
 
 export default function CreateGist() {
   const [searchVal, setSearchVal] = useState("");
@@ -28,7 +29,7 @@ export default function CreateGist() {
           handleSearch={handleSearch}
         />
       }
-      main={<GistForm />}
+      main={<GistHookForm />}
     />
   );
 }

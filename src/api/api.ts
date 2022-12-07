@@ -97,6 +97,7 @@ export const getUserGists = async (username: string | undefined) => {
     return response.data;
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
@@ -132,6 +133,11 @@ export const getStarredGists = async (per_page: number, page: number) => {
 };
 
 export const getAuthUserGists = async () => {
-  const response = await api.get("/gists", getConfig());
-  return response.data;
+  try {
+    const response = await api.get("/gists", getConfig());
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
 };

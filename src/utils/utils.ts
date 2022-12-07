@@ -20,12 +20,6 @@ export const returnFiles = (filesArr: any) => {
   return files;
 };
 
-// export const formattedTime = (time: string) => {
-//   const date = moment(time).format("D MMM YYYY");
-//   const hours = moment(time).format("h:mm A");
-//   return `${date} ${hours}`;
-// };
-
 export const formattedTime = (time: string) => {
   return moment(time).format("D MMM YYYY");
 };

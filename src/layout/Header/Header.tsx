@@ -10,7 +10,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { HeaderProps } from "../../types/types";
 import { RightDiv, LeftDiv, StyledLink } from "./Header.styles";
 import logo from "../../assets/emumba-logo.png";
-import { login, logout } from "../../store/userSlice";
+import { login, logout } from "../../slices/userSlice";
 import { RootState } from "../../store/store";
 
 export default function Header(props: HeaderProps) {

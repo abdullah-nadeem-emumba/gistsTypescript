@@ -47,6 +47,11 @@ export type UserType = {
   url: string;
 };
 
+export type UserProfileType = {
+  gists: any[];
+  loading: Boolean;
+};
+
 export type LandingScreenProps = {
   emptyScreen?: Boolean;
   gists: any[];

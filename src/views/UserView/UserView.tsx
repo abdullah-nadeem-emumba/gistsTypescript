@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import UserGist from "../../components/UserGist/UserGist";
 import { Typography, Avatar, Button } from "@mui/material";
 import { UserContext } from "../../contexts/UserContext";
@@ -12,35 +13,57 @@ import {
   StyledLink,
 } from "./UserView.styles";
 import Loader from "../../components/Loader/Loader";
+import { RootState, AppDispatch } from "../../store/store";
+import { getPublicUserGists, getAuthGists } from "../../slices/profileSlice";
 
 export default function UserView({ username }) {
-  const [gists, setGists] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
+  //const [gists, setGists] = useState<any[]>([]);
+  //const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext);
   const { state } = useLocation();
   const navigate = useNavigate();
+  const { gists, loading } = useSelector(
+    (state: RootState) => state.userProfile
+  );
+  const dispatch = useDispatch<AppDispatch>();
 
   const owner: any = gists.length > 0 && gists[0].owner;
 
   useEffect(() => {
     getGists();
-  }, [username, user]);
+  }, []);
 
   useEffect(() => {
     getGists();
-  }, []);
+  }, [username, user?.username]);
 
   const getGists = async () => {
-    setLoading(true);
-    if (user && username === user.username) {
-      const res = await getAuthUserGists();
-      setGists(res);
+    if (user?.username && username === user?.username) {
+      dispatch(getAuthGists());
     } else {
-      const response = await getUserGists(username);
-      setGists(response);
+      dispatch(getPublicUserGists(username));
     }
-    setLoading(false);
   };
+
+  // useEffect(() => {
+  //   getGists();
+  // }, [username, user]);
+
+  // useEffect(() => {
+  //   getGists();
+  // }, []);
+
+  // const getGists = async () => {
+  //   setLoading(true);
+  //   if (user && username === user.username) {
+  //     const res = await getAuthUserGists();
+  //     setGists(res);
+  //   } else {
+  //     const response = await getUserGists(username);
+  //     setGists(response);
+  //   }
+  //   setLoading(false);
+  // };
 
   const openGistDetails = (gist: any) => {
     navigate("/gistdetails", { state: { ...gist } });

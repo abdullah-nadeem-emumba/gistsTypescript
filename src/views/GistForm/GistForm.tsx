@@ -13,13 +13,15 @@ export default function GistForm() {
   const { state } = useLocation();
 
   const validationSchema = Yup.object({
-    // filename: Yup.string().required("Required"),
     description: Yup.string()
       .required("Required")
       .min(4, "Description must be at least 4 characters"),
-    // content: Yup.string()
-    //   .required("Required")
-    //   .min(5, "Content must be at least 5 characters"),
+    files: Yup.array(
+      Yup.object({
+        filename: Yup.string().required(),
+        content: Yup.string().required(),
+      })
+    ),
   });
 
   const initialValues = {
@@ -27,15 +29,10 @@ export default function GistForm() {
     description: "",
   };
 
-  const formatFileContent = (content) => {
-    return content.join("\n");
-  };
-
   if (state) {
     initialValues.description = state.description;
     initialValues.files = state.files;
     console.log(initialValues);
-    // initialValues.content = formatFileContent(state.content);
   }
 
   const onSubmit = async (values) => {
