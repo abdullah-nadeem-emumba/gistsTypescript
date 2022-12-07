@@ -2,7 +2,7 @@ import React from "react";
 import { LIST, CARD } from "../../constants/constants";
 import TableView from "../TableView/TableView";
 import ToggleView from "../../components/ToggleView/ToggleView";
-import CardView from "../CardView";
+import CardView from "../CardView/CardView";
 import PaginationFooter from "../../components/PaginationFooter/PaginationFooter";
 import Loader from "../../components/Loader/Loader";
 import { LandingScreenProps } from "../../types/types";

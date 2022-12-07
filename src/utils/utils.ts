@@ -11,7 +11,7 @@ export const getUserFromStorage = () => {
 };
 
 export const returnFiles = (filesArr: any) => {
-  let files = {};
+  let files: any = {};
   filesArr.forEach((item: any) => {
     files[item.filename] = {
       content: item.content,

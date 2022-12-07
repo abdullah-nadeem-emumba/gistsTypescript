@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { CardViewProps } from "../types/types";
-import GistCard from "../components/GistCard/GistCard";
+import { CardViewProps } from "../../types/types";
+import GistCard from "../../components/GistCard/GistCard";
 
 const StyledDivWrapper = styled.div`
   display: grid;

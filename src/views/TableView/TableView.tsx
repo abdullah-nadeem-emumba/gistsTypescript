@@ -24,7 +24,6 @@ import { UserContext } from "../../contexts/UserContext";
 import { formattedDate, formattedTime } from "../../utils/utils";
 
 export default function TableView(props: TableViewProps) {
-  //const { user } = useContext(UserContext);
   const user = useSelector((state: RootState) => state.user);
   const { gists, onRowClick } = props;
   const displayFileNames = (filesArr: string[]) => {
