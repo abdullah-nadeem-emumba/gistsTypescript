@@ -5,20 +5,22 @@ import ToggleView from "../../components/ToggleView/ToggleView";
 import CardView from "../CardView";
 import PaginationFooter from "../../components/PaginationFooter/PaginationFooter";
 import Loader from "../../components/Loader/Loader";
+import { LandingScreenProps } from "../../types/types";
 
-export default function StarredGists({
-  loading,
-  viewType,
-  gists,
-  setViewType,
-  openGistDetails,
-  page,
-  count,
-  handleChangePage,
-  handleNextPage,
-  handleStar,
-  handleUnstar,
-}) {
+export default function StarredGists(props: LandingScreenProps) {
+  const {
+    loading,
+    viewType,
+    gists,
+    setViewType,
+    openGistDetails,
+    page,
+    count,
+    handleChangePage,
+    handleNextPage,
+    handleStar,
+    handleUnstar,
+  } = props;
   const displayScreen = () => (
     <div>
       <ToggleView viewType={viewType} setViewType={setViewType} />

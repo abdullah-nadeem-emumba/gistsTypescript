@@ -35,7 +35,7 @@ export default function GistForm() {
     console.log(initialValues);
   }
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values: any) => {
     if (state) {
       const response = await editGist(
         state.id,

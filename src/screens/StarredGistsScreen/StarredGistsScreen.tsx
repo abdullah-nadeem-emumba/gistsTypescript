@@ -4,15 +4,15 @@ import StarredGists from "../../views/StarredGists/StarredGists";
 import Header from "../../layout/Header/Header";
 import { getStarredGists, starGist, unStarGist } from "../../api/api";
 import { useNavigate } from "react-router-dom";
+import useSearch from "../../utils/useSearch";
 
 export default function StarredGistsScreen() {
   const [viewType, setViewType] = useState("LIST");
   const [loading, setLoading] = useState(false);
   const [gists, setGists] = useState([]);
   const [page, setPage] = useState(1);
-  const [searchVal, setSearchVal] = useState("");
+  const [searchVal, handleSearchChange, handleSearch] = useSearch();
   const navigate = useNavigate();
-  //   const { user } = useContext(UserContext);
 
   const handleChangePage = (
     event: React.ChangeEvent<unknown>,
@@ -23,10 +23,6 @@ export default function StarredGistsScreen() {
 
   const handleNextPage = () => {
     setPage(page + 1);
-  };
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchVal(e.target.value);
   };
 
   const openGistDetails = (gist: any) => {
@@ -40,14 +36,6 @@ export default function StarredGistsScreen() {
   useEffect(() => {
     listStarredGists();
   }, [page]);
-
-  const handleSearch = () => {
-    navigate("/search", {
-      state: {
-        searchUserName: searchVal,
-      },
-    });
-  };
 
   const listStarredGists = async () => {
     setLoading(true);

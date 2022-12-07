@@ -22,7 +22,7 @@ export default function Header(props: HeaderProps) {
 
   console.log("REDUX STATE", user);
 
-  const handleOpen = (event) => {
+  const handleOpen = (event: { currentTarget: React.SetStateAction<null> }) => {
     setAnchorEl(event.currentTarget);
   };
 

@@ -1,25 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Root from "../../layout/Root/Root";
 import Header from "../../layout/Header/Header";
 import GistForm from "../../views/GistForm/GistForm";
-import { useNavigate } from "react-router-dom";
 import GistHookForm from "../../views/GistHookForm/GistHookForm";
+import useSearch from "../../utils/useSearch";
 
 export default function CreateGist() {
-  const [searchVal, setSearchVal] = useState("");
-  const navigate = useNavigate();
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchVal(e.target.value);
-  };
-
-  const handleSearch = () => {
-    navigate("/search", {
-      state: {
-        searchUserName: searchVal,
-      },
-    });
-  };
+  const [searchVal, handleSearchChange, handleSearch] = useSearch();
   return (
     <Root
       header={

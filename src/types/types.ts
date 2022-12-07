@@ -14,19 +14,23 @@ export type ButtonProps = {
 };
 
 export type SearchFieldProps = {
-  value: string;
+  value: string | ((e: React.ChangeEvent<HTMLInputElement>) => void);
   label: string;
   placeholder: string;
-  handleSearchChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSearchChange?:
+    | string
+    | ((e: React.ChangeEvent<HTMLInputElement>) => void);
   handleKeyPress?: (e: Event) => Promise<[]>;
-  handleSearch?: () => any;
+  handleSearch?: string | ((e: React.ChangeEvent<HTMLInputElement>) => void);
 };
 
 export type HeaderProps = {
-  searchVal: string;
-  handleSearchChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  searchVal: string | ((e: React.ChangeEvent<HTMLInputElement>) => void);
+  handleSearchChange?:
+    | string
+    | ((e: React.ChangeEvent<HTMLInputElement>) => void);
   handleKeyPress?: (e: Event) => Promise<[]>;
-  handleSearch?: () => any;
+  handleSearch?: string | ((e: React.ChangeEvent<HTMLInputElement>) => void);
 };
 
 export type GistActionsProps = {

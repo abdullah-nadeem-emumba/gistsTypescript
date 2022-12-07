@@ -37,10 +37,8 @@ export default function GistHookForm() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      files: [{ filename: "", content: "" }],
-      //   filename: "",
-      //   content: "",
-      description: "",
+      files: state ? state.files : [{ filename: "", content: "" }],
+      description: state ? state.description : "",
     },
     resolver: yupResolver(validationSchema),
   });
@@ -50,32 +48,15 @@ export default function GistHookForm() {
     name: "files", // unique name for your Field Array
   });
 
-  const initialValues = {
-    files: [{ filename: "", content: "" }],
-    description: "",
-  };
-
-  if (state) {
-    initialValues.description = state.description;
-    initialValues.files = state.files;
-    console.log(initialValues);
-  }
-
   const submitForm = async (data: any) => {
-    console.log(data);
-
-    // if (state) {
-    //   const response = await editGist(
-    //     state.id,
-    //     data.description,
-    //     data.files
-    //   );
-    // } else {
-    //   const response = await createNewGist(data.description, data.files);
-    // }
-    // navigate("/");
+    if (state) {
+      const response = await editGist(state.id, data.description, data.files);
+      if (response) navigate("/");
+    } else {
+      const response = await createNewGist(data.description, data.files);
+      if (response) navigate("/");
+    }
   };
-  console.log("errors", errors);
 
   return (
     <div>
@@ -115,13 +96,10 @@ export default function GistHookForm() {
                     )}
                     <Controller
                       name={`files.${index}.filename`}
-                      defaultValue={item.filename}
                       control={control}
                       render={({ field }) => (
                         <FormHookField
-                          // {...register("filename")}
                           {...field}
-                          // id={"filename"}
                           customstyle="dark"
                           label={"Enter file name..."}
                           fullWidth
@@ -135,10 +113,8 @@ export default function GistHookForm() {
                     <Controller
                       name={`files.${index}.content`}
                       control={control}
-                      defaultValue={item.content}
                       render={({ field }) => (
                         <FormHookField
-                          // {...register("content")}
                           {...field}
                           id={"content"}
                           customstyle="dark"

@@ -1,25 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import Root from "../../layout/Root/Root";
 import Header from "../../layout/Header/Header";
 import UserView from "../../views/UserView/UserView";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import useSearch from "../../utils/useSearch";
 
 export default function UserProfile() {
   const { username } = useParams();
-  const [searchVal, setSearchVal] = useState("");
-  const navigate = useNavigate();
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchVal(e.target.value);
-  };
-
-  const handleSearch = () => {
-    navigate("/search", {
-      state: {
-        searchUserName: searchVal,
-      },
-    });
-  };
+  const [searchVal, handleSearchChange, handleSearch] = useSearch();
   return (
     <Root
       header={

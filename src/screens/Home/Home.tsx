@@ -4,16 +4,16 @@ import LandingScreen from "../../views/LandingScreen/LandingScreen";
 import Header from "../../layout/Header/Header";
 import { getPublicGists, starGist, unStarGist } from "../../api/api";
 import { useNavigate, useLocation } from "react-router-dom";
+import useSearch from "../../utils/useSearch";
 
 export default function Home() {
   const [viewType, setViewType] = useState("LIST");
   const [loading, setLoading] = useState(false);
   const [gists, setGists] = useState([]);
   const [page, setPage] = useState(1);
-  const [searchVal, setSearchVal] = useState("");
+  const [searchVal, handleSearchChange, handleSearch] = useSearch();
   const navigate = useNavigate();
   const { state } = useLocation();
-  //   const { user } = useContext(UserContext);
 
   const handleChangePage = (
     event: React.ChangeEvent<unknown>,
@@ -24,10 +24,6 @@ export default function Home() {
 
   const handleNextPage = () => {
     setPage(page + 1);
-  };
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchVal(e.target.value);
   };
 
   const openGistDetails = (gist: any) => {
@@ -50,14 +46,6 @@ export default function Home() {
       setGists(data);
     }
     setLoading(false);
-  };
-
-  const handleSearch = () => {
-    navigate("/search", {
-      state: {
-        searchUserName: searchVal,
-      },
-    });
   };
 
   const star = async (

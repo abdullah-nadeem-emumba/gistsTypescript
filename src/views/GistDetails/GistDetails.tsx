@@ -15,7 +15,7 @@ import {
 import { Typography } from "@mui/material";
 import UserInfo from "../../components/UserInfo/UserInfo";
 import GistActions from "../../components/GistActions/GistActions";
-import ArrowsBox from "../../components/ArrowBox/ArrowBox";
+import ArrowsBox from "../../components/ArrowBox/Arrowbox";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { formatFileContent } from "../../utils/utils";
@@ -88,8 +88,9 @@ export default function GistDetails() {
       const formattedContent = formatFileContent(response);
       setFilesData(filesArray);
       setFileContent(formattedContent);
-    } catch (e) {
-      setError(e);
+    } catch (error) {
+      if (error instanceof Error) return setError(error.message);
+      setError(String(error));
     }
     setLoading(false);
   };

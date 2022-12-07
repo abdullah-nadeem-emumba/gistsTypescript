@@ -107,9 +107,15 @@ export const createNewGist = async (description: string, files: any) => {
     public: true,
     files: returnFiles(files),
   };
-  const response = await api.post("/gists", data, getConfig());
-  console.log(response);
-  return response;
+  try {
+    const response = await api.post("/gists", data, getConfig());
+    console.log(response);
+    if (response.status === 200) {
+      return true;
+    }
+  } catch (error) {
+    return false;
+  }
 };
 
 export const editGist = async (id: string, description: string, files: any) => {
@@ -118,9 +124,14 @@ export const editGist = async (id: string, description: string, files: any) => {
     description,
     files: returnFiles(files),
   };
-  const response = await api.patch(`/gists/${id}`, data, getConfig());
-  console.log(response);
-  return response;
+  try {
+    const response = await api.patch(`/gists/${id}`, data, getConfig());
+    console.log(response);
+    if (response.status === 200) return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 };
 
 export const getStarredGists = async (per_page: number, page: number) => {
