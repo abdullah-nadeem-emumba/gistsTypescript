@@ -34,7 +34,7 @@ export default function GistDetails() {
   const [filesData, setFilesData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [starred, setStarred] = useState<Boolean | undefined>(false);
+  const [starred, setStarred] = useState<boolean | undefined>(false);
   const { state } = useLocation();
   const navigate = useNavigate();
   const { files, owner, id, description } = state;

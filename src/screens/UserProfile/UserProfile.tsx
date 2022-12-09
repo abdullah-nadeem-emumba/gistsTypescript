@@ -17,7 +17,7 @@ export default function UserProfile() {
           handleSearch={handleSearch}
         />
       }
-      main={<UserView username={username} />}
+      main={<UserView username={username ? username : ""} />}
     />
   );
 }

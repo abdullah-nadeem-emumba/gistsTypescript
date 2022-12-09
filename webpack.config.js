@@ -4,11 +4,11 @@ const htmlPlugin = new HtmlWebPackPlugin({
   template: "./public/index.html",
 });
 module.exports = {
-  mode: "development",
   entry: "./src/index.tsx",
   output: {
     path: __dirname + "/dist/",
     publicPath: "/",
+    clean: true,
   },
   module: {
     rules: [

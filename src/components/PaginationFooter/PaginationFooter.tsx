@@ -7,13 +7,10 @@ import {
 import { Pagination } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Button from "../Button/Button";
+import { PaginationFooterProps } from "../../types/types";
 
-export default function PaginationFooter({
-  handleNextPage,
-  handleChangePage,
-  count,
-  page,
-}) {
+export default function PaginationFooter(props: PaginationFooterProps) {
+  const { handleNextPage, handleChangePage, count, page } = props;
   return (
     <StyledFooter>
       <StyledDiv>

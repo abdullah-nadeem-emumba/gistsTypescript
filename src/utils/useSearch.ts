@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function useSearch() {
+export default function useSearch(): [
+  string,
+  (e: React.ChangeEvent<HTMLInputElement>) => void,
+  () => void
+] {
   const [searchVal, setSearchVal] = useState("");
   const navigate = useNavigate();
 

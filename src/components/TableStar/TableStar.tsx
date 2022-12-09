@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
-import { isGistStarred, starGist, unStarGist } from "../../api/api";
+import { isGistStarred } from "../../api/api";
+import { TableStarProps } from "../../types/types";
 
-export default function Star({ id, handleStar, handleUnstar }) {
-  const [starred, setStarred] = useState<Boolean | undefined>(false);
+export default function Star(props: TableStarProps) {
+  const { id, handleStar, handleUnstar } = props;
+  const [starred, setStarred] = useState<boolean | undefined>(false);
 
   useEffect(() => {
     checkGistStar(id);

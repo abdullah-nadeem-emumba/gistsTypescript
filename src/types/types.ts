@@ -14,27 +14,23 @@ export type ButtonProps = {
 };
 
 export type SearchFieldProps = {
-  value: string | ((e: React.ChangeEvent<HTMLInputElement>) => void);
+  value: string;
   label: string;
   placeholder: string;
-  handleSearchChange?:
-    | string
-    | ((e: React.ChangeEvent<HTMLInputElement>) => void);
+  handleSearchChange?: (e: any) => void;
   handleKeyPress?: (e: Event) => Promise<[]>;
-  handleSearch?: string | ((e: React.ChangeEvent<HTMLInputElement>) => void);
+  handleSearch?: (e: any) => void;
 };
 
 export type HeaderProps = {
-  searchVal: string | ((e: React.ChangeEvent<HTMLInputElement>) => void);
-  handleSearchChange?:
-    | string
-    | ((e: React.ChangeEvent<HTMLInputElement>) => void);
-  handleKeyPress?: (e: Event) => Promise<[]>;
-  handleSearch?: string | ((e: React.ChangeEvent<HTMLInputElement>) => void);
+  searchVal: string;
+  handleSearchChange?: (e: any) => void;
+  handleKeyPress?: (e: any) => Promise<[]>;
+  handleSearch?: (e: any) => void;
 };
 
 export type GistActionsProps = {
-  starred: Boolean | undefined;
+  starred: boolean | undefined;
   toggleStar: (id: string) => any;
   fork: (id: string) => any;
   deleteMyGist?: (id: string) => void;
@@ -42,7 +38,7 @@ export type GistActionsProps = {
   user: any;
   owner: any;
   id: string;
-  showEditDelete?: Boolean;
+  showEditDelete?: boolean;
 };
 
 export type UserType = {
@@ -53,15 +49,15 @@ export type UserType = {
 
 export type UserProfileType = {
   gists: any[];
-  loading: Boolean;
+  loading: boolean;
 };
 
 export type LandingScreenProps = {
-  emptyScreen?: Boolean;
+  emptyScreen?: boolean;
   gists: any[];
   page: number;
   count: number;
-  loading: Boolean;
+  loading: boolean;
   openGistDetails: (gist: any) => void;
   viewType: string;
   setViewType: (type: string) => void;
@@ -70,8 +66,8 @@ export type LandingScreenProps = {
     event: React.ChangeEvent<unknown>,
     newPage: number
   ) => void;
-  handleStar: (id: string, setStarred: (starred: Boolean) => void) => void;
-  handleUnstar: (id: string, setStarred: (starred: Boolean) => void) => void;
+  handleStar: (id: string, setStarred: (starred: boolean) => void) => void;
+  handleUnstar: (id: string, setStarred: (starred: boolean) => void) => void;
 };
 
 export type RootProps = {
@@ -82,8 +78,12 @@ export type RootProps = {
 export type TableViewProps = {
   gists: any[];
   onRowClick: (gist: any) => void;
-  handleStar: (id: string, setStarred: (starred: Boolean) => void) => void;
-  handleUnstar: (id: string, setStarred: (starred: Boolean) => void) => void;
+  handleStar: (id: string, setStarred: (starred: boolean) => void) => void;
+  handleUnstar: (id: string, setStarred: (starred: boolean) => void) => void;
+};
+
+export type UserViewProps = {
+  username: string;
 };
 
 export type CardViewProps = {
@@ -103,4 +103,29 @@ export type UserInfoProps = {
 export type ToggleViewProps = {
   viewType: string;
   setViewType: (type: string) => void;
+};
+
+export type PaginationFooterProps = {
+  page: number;
+  count: number;
+  handleNextPage: () => void;
+  handleChangePage: (event: any, newPage: number) => void;
+};
+
+export type UserGistProps = {
+  item: any;
+  onGistClick: (item: any) => void;
+};
+
+export type DropMenuProps = {
+  open: boolean;
+  onClose: () => void;
+  anchorEl: HTMLElement | null;
+  signout: () => void;
+};
+
+export type TableStarProps = {
+  id: string;
+  handleStar: (id: string, setStarred: (starred: boolean) => void) => void;
+  handleUnstar: (id: string, setStarred: (starred: boolean) => void) => void;
 };

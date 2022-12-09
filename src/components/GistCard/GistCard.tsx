@@ -37,7 +37,8 @@ export default function GistCard(props: GistCardProps) {
 
         setFileContent(result);
       } catch (e) {
-        setError(e);
+        if (e instanceof Error) return setError(e.message);
+        setError(String(error));
       }
       setLoading(false);
     }

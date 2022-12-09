@@ -50,7 +50,7 @@ export default function Home() {
 
   const star = async (
     gistID: string,
-    setStarred: (starred: Boolean) => void
+    setStarred: (starred: boolean) => void
   ) => {
     const res = await starGist(gistID);
     if (res) {
@@ -60,7 +60,7 @@ export default function Home() {
 
   const unStar = async (
     gistID: string,
-    setStarred: (starred: Boolean) => void
+    setStarred: (starred: boolean) => void
   ) => {
     const res = await unStarGist(gistID);
     if (res) {

@@ -15,8 +15,10 @@ import {
 import Loader from "../../components/Loader/Loader";
 import { RootState, AppDispatch } from "../../store/store";
 import { getPublicUserGists, getAuthGists } from "../../slices/profileSlice";
+import { UserViewProps } from "../../types/types";
 
-export default function UserView({ username }) {
+export default function UserView(props: UserViewProps) {
+  const { username } = props;
   //const [gists, setGists] = useState<any[]>([]);
   //const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext);

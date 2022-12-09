@@ -21,12 +21,14 @@ import {
 } from "../../api/api";
 import { formatFileContent } from "../../utils/utils";
 import GistActions from "../GistActions/GistActions";
+import { UserGistProps } from "../../types/types";
 
-export default function UserGist({ item, onGistClick }) {
+export default function UserGist(props: UserGistProps) {
+  const { item, onGistClick } = props;
   const [filecontent, setFileContent] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [starred, setStarred] = useState<Boolean | undefined>(false);
+  const [starred, setStarred] = useState<boolean | undefined>(false);
   // const { user } = useContext(UserContext);
   const user = useSelector((state: RootState) => state.user);
 
@@ -44,7 +46,8 @@ export default function UserGist({ item, onGistClick }) {
         const result = formatFileContent(response);
         setFileContent(result);
       } catch (e) {
-        setError(e);
+        if (e instanceof Error) return setError(e.message);
+        setError(String(error));
       }
       setLoading(false);
     }

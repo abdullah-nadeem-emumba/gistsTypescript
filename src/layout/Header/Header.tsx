@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StyledHeader } from "./Header.styles";
 import SearchField from "../../components/SearchField/SearchField";
@@ -6,7 +6,6 @@ import { Avatar, Typography } from "@mui/material";
 import Button from "../../components/Button/Button";
 import DropMenu from "../../components/DropMenu/DropMenu";
 import { USER } from "../../constants/constants";
-import { UserContext } from "../../contexts/UserContext";
 import { HeaderProps } from "../../types/types";
 import { RightDiv, LeftDiv, StyledLink } from "./Header.styles";
 import logo from "../../assets/emumba-logo.png";
@@ -14,15 +13,12 @@ import { login, logout } from "../../slices/userSlice";
 import { RootState } from "../../store/store";
 
 export default function Header(props: HeaderProps) {
-  const [anchorEl, setAnchorEl] = useState(null);
-  //const { user, setUser } = useContext(UserContext);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
 
-  console.log("REDUX STATE", user);
-
-  const handleOpen = (event: { currentTarget: React.SetStateAction<null> }) => {
+  const handleOpen = (event: React.MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -31,16 +27,13 @@ export default function Header(props: HeaderProps) {
   };
 
   const userLogin = () => {
-    //setUser(USER);
     dispatch(login());
     localStorage.setItem("user", JSON.stringify(USER));
-    console.log(localStorage.getItem("user"));
   };
 
   const signout = () => {
     localStorage.removeItem("user");
     dispatch(logout());
-    //setUser(null);
     setAnchorEl(null);
   };
 
