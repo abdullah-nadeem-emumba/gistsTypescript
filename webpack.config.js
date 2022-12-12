@@ -1,13 +1,13 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const path = require("path");
 const htmlPlugin = new HtmlWebPackPlugin({
   template: "./public/index.html",
 });
-module.exports = {
+
+const config = {
   entry: "./src/index.tsx",
   output: {
     path: __dirname + "/dist/",
-    publicPath: "/",
+    publicPath: "./",
     clean: true,
   },
   module: {
@@ -39,4 +39,12 @@ module.exports = {
     extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
   },
   plugins: [htmlPlugin],
+};
+
+module.exports = (env, argv) => {
+  if (argv.mode == "development") {
+    config.output.publicPath = "/";
+  }
+
+  return config;
 };

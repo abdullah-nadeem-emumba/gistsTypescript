@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { Typography, Card } from "@mui/material";
 
+export const BlueText = styled(Typography)`
+  color: #0c76ff;
+`;
+
 export const GistScreenContainer = styled.div`
   display: grid;
   grid-template-rows: 5.5em 50em;

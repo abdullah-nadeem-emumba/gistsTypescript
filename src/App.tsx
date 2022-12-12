@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from "react";
 import { Routes, Route } from "react-router-dom";
 import GlobalStyles from "./styles/global";
-import UserProfile from "./screens/UserProfile/UserProfile";
+import UserProfile from "./screens/UserProfileScreen/UserProfile";
 import GistScreen from "./screens/GistScreen/GistScreen";
-import CreateGist from "./screens/CreateGist/CreateGist";
-import Home from "./screens/Home/Home";
+import CreateGist from "./screens/CreateGistScreen/CreateGist";
+import Home from "./screens/HomeScreen/Home";
 import SearchScreen from "./screens/SearchScreen/SearchScreen";
 import StarredGistsScreen from "./screens/StarredGistsScreen/StarredGistsScreen";
 import { UserContext } from "./contexts/UserContext";

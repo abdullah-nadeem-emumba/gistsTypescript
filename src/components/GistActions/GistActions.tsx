@@ -3,6 +3,7 @@ import {
   HeaderRightDiv,
   ActionItemDiv,
   BorderedDiv,
+  BlueText,
 } from "./GistActions.styles";
 import { Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -30,11 +31,11 @@ export default function GistActions(props: GistActionsProps) {
             {" "}
             <ActionItemDiv onClick={editGist}>
               <EditIcon sx={{ color: "#0C76FF" }} />
-              <Typography color={"#0C76FF"}>Edit</Typography>
+              <BlueText>Edit</BlueText>
             </ActionItemDiv>
             <ActionItemDiv onClick={() => props.deleteMyGist?.(id)}>
               <DeleteIcon sx={{ color: "#0C76FF" }} />
-              <Typography color={"#0C76FF"}>Delete</Typography>
+              <BlueText>Delete</BlueText>
             </ActionItemDiv>
           </>
         )}
@@ -44,7 +45,7 @@ export default function GistActions(props: GistActionsProps) {
           ) : (
             <StarBorderIcon sx={{ color: "#0C76FF" }} />
           )}
-          <Typography color={"#0C76FF"}>Star</Typography>
+          <BlueText>Star</BlueText>
           <BorderedDiv>
             <Typography
               sx={{
@@ -60,7 +61,7 @@ export default function GistActions(props: GistActionsProps) {
         </ActionItemDiv>
         <ActionItemDiv onClick={() => fork(id)}>
           <StarBorderIcon sx={{ color: "#0C76FF" }} />
-          <Typography color={"#0C76FF"}>Fork</Typography>
+          <BlueText>Fork</BlueText>
           <BorderedDiv>
             <Typography
               sx={{

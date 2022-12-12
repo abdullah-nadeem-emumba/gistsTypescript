@@ -11,6 +11,7 @@ import {
   LineNumberText,
   FlexDiv,
   CenterDiv,
+  BlueText,
 } from "./GistDetails.styles";
 import { Typography } from "@mui/material";
 import UserInfo from "../../components/UserInfo/UserInfo";
@@ -143,7 +144,7 @@ export default function GistDetails() {
       <StyledGistCard elevation={5}>
         <CardHeader>
           <ArrowsBox />
-          <Typography color={"#0C76FF"}>{filename}</Typography>
+          <BlueText>{filename}</BlueText>
         </CardHeader>
         <CardContent>{displayFileContent()}</CardContent>
       </StyledGistCard>
